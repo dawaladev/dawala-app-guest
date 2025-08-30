@@ -2,6 +2,7 @@
 
 import { useRouter, usePathname } from 'next/navigation'
 import { useState, useEffect } from 'react'
+import Image from 'next/image'
 
 export default function LanguageSwitcher() {
   const router = useRouter()
@@ -48,9 +49,11 @@ export default function LanguageSwitcher() {
         className="flex items-center space-x-1 px-2 py-1 bg-white/90 backdrop-blur-sm rounded-full border border-white/30 text-gray-800 hover:bg-white transition-all duration-200 shadow-lg cursor-pointer"
       >
         <div className="w-5 h-5 rounded-full overflow-hidden bg-gray-100 flex items-center justify-center">
-          <img
+          <Image
             src={currentLocale === 'id' ? '/id.png' : '/en.png'}
             alt={currentLocale === 'id' ? 'Indonesia' : 'English'}
+            width={20}
+            height={20}
             className="w-full h-full object-cover"
           />
         </div>
@@ -76,9 +79,11 @@ export default function LanguageSwitcher() {
             }`}
           >
             <div className="w-4 h-4 rounded-full overflow-hidden bg-gray-100 flex items-center justify-center">
-              <img
+              <Image
                 src="/id.png"
                 alt="Indonesia"
+                width={16}
+                height={16}
                 className="w-full h-full object-cover"
               />
             </div>
@@ -91,9 +96,11 @@ export default function LanguageSwitcher() {
             }`}
           >
             <div className="w-4 h-4 rounded-full overflow-hidden bg-gray-100 flex items-center justify-center">
-              <img
+              <Image
                 src="/en.png"
                 alt="English"
+                width={16}
+                height={16}
                 className="w-full h-full object-cover"
               />
             </div>

@@ -14,7 +14,7 @@ export default function MakananCard({ makanan, onClick, locale = 'id' }: Makanan
 
 
   // Helper: get first valid image string from foto array
-  const getFirstValidImage = (foto: any) => {
+  const getFirstValidImage = (foto: string | string[]): string => {
     console.log('Raw foto value:', foto, 'Type:', typeof foto);
     
     if (!foto) return '';
@@ -70,12 +70,6 @@ export default function MakananCard({ makanan, onClick, locale = 'id' }: Makanan
     return '';
   };
 
-  // Helper to get correct image src
-  const getImageUrl = (fotoStr: string) => {
-    return getSupabaseImageUrl(fotoStr);
-  };
-
-
   const formatRupiah = (amount: number) => {
     return new Intl.NumberFormat('id-ID', {
       style: 'currency',
@@ -96,6 +90,9 @@ export default function MakananCard({ makanan, onClick, locale = 'id' }: Makanan
         {(() => {
           // Always use first valid image string
           let imageUrl = getFirstValidImage(makanan.foto);
+          if (imageUrl && !imageUrl.startsWith('data:')) {
+            imageUrl = getSupabaseImageUrl(imageUrl);
+          }
           if (!imageUrl) imageUrl = '/placeholder-food.jpg';
           console.log('Image URL:', imageUrl);
           return (

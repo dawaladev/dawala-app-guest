@@ -1,8 +1,9 @@
 "use client"
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { usePathname } from 'next/navigation';
-import { getTexts } from '@/lib/texts';
+import { getTexts, Texts } from '@/lib/texts';
 import { getCurrentLocale } from '@/lib/locale';
 import LanguageSwitcher from './LanguageSwitcher';
 
@@ -10,7 +11,7 @@ import LanguageSwitcher from './LanguageSwitcher';
 export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [texts, setTexts] = useState<any>(null);
+  const [texts, setTexts] = useState<Texts | null>(null);
   const pathname = usePathname();
   const locale = getCurrentLocale(pathname);
 
@@ -62,9 +63,11 @@ export default function Header() {
           {/* Logo */}
           <div className="flex items-center flex-shrink-0">
             <Link href="/" className="flex items-center">
-              <img
+              <Image
                 src="/Dawala.png"
                 alt={texts.header.logoAlt}
+                width={isScrolled ? 160 : 192}
+                height={isScrolled ? 40 : 48}
                 className={`w-auto transition-all duration-300 ${
                   isScrolled ? 'h-8 sm:h-10' : 'h-10 sm:h-12'
                 }`}

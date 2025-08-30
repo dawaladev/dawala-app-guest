@@ -1,7 +1,8 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { getTexts } from '@/lib/texts'
+import Link from 'next/link'
+import { getTexts, Texts } from '@/lib/texts'
 import { getCurrentLocale } from '@/lib/locale'
 
 interface FooterProps {
@@ -9,13 +10,11 @@ interface FooterProps {
 }
 
 export default function Footer({ locale }: FooterProps) {
-  const [texts, setTexts] = useState<any>(null)
-  const [currentLocale, setCurrentLocale] = useState<'id' | 'en'>('id')
+  const [texts, setTexts] = useState<Texts | null>(null)
 
   useEffect(() => {
     // Use provided locale or get from localStorage
     const finalLocale = locale || getCurrentLocale(window.location.pathname)
-    setCurrentLocale(finalLocale)
     
     const loadTexts = async () => {
       const loadedTexts = await getTexts(finalLocale)
@@ -67,12 +66,12 @@ export default function Footer({ locale }: FooterProps) {
           <div className="sm:col-span-2 lg:col-span-1">
             <h3 className="text-lg font-bold mb-3 sm:mb-4">{texts.footer.quickLinks.title}</h3>
             <div className="space-y-2">
-              <a href="/" className="block text-gray-300 hover:text-white transition-colors text-sm sm:text-base">
+              <Link href="/" className="block text-gray-300 hover:text-white transition-colors text-sm sm:text-base">
                 {texts.footer.quickLinks.home}
-              </a>
-              <a href="/contact" className="block text-gray-300 hover:text-white transition-colors text-sm sm:text-base">
+              </Link>
+              <Link href="/contact" className="block text-gray-300 hover:text-white transition-colors text-sm sm:text-base">
                 {texts.footer.quickLinks.contact}
-              </a>
+              </Link>
               <a href="mailto:dawaladev@gmail.com" className="block text-gray-300 hover:text-white transition-colors text-sm sm:text-base">
                 {texts.footer.quickLinks.reservation}
               </a>
