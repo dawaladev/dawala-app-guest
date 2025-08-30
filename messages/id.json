@@ -1,0 +1,147 @@
+{
+  "header": {
+    "logoAlt": "Logo Alamendah",
+    "navigation": {
+      "home": "Beranda",
+      "menu": "Menu",
+      "contact": "Kontak"
+    },
+    "contactButton": "Hubungi Kami"
+  },
+  "footer": {
+    "companyName": "DESA WISATA ALAMENDAH",
+    "description": "Desa wisata yang menawarkan pengalaman kuliner dan wisata terbaik di Kabupaten Bandung dengan berbagai paket wisata dan kuliner yang menarik.",
+    "subDescription": "Nikmati keindahan alam dan cita rasa kuliner lokal yang autentik di Jawa Barat.",
+    "contactInfo": {
+      "title": "Informasi Kontak",
+      "email": "dawaladev@gmail.com",
+      "phone": "+62 xxx-xxxx-xxxx",
+      "location": "Desa Wisata Alamendah, Kab. Bandung, Indonesia"
+    },
+    "quickLinks": {
+      "title": "Menu Cepat",
+      "home": "Beranda",
+      "contact": "Hubungi Kami",
+      "reservation": "Reservasi"
+    },
+    "copyright": "© 2025 DESA WISATA ALAMENDAH. All rights reserved."
+  },
+  "home": {
+    "hero": {
+      "title": "Selamat Datang di Desa Wisata Alamendah",
+      "subtitle": "Jelajahi keindahan alam Kabupaten Bandung, nikmati kuliner autentik, dan rasakan pengalaman wisata yang tak terlupakan",
+      "ctaButton": "Rencanakan Kunjungan"
+    },
+    "featured": {
+      "badge": "Unggulan Kami",
+      "title": "Paket Wisata & Kuliner",
+      "description": "Temukan berbagai pilihan paket wisata dan kuliner yang telah kami siapkan khusus untuk pengalaman yang berkesan di Desa Wisata Alamendah, Kabupaten Bandung"
+    },
+    "about": {
+      "title": "Tentang Desa Wisata Alamendah",
+      "description1": "Desa Wisata Alamendah di Kabupaten Bandung menawarkan pengalaman autentik kehidupan pedesaan dengan keindahan alam yang menakjubkan. Nikmati aktivitas wisata yang beragam, mulai dari wisata alam, budaya, hingga kuliner tradisional yang lezat.",
+      "description2": "Dengan pemandangan pegunungan yang indah dan udara yang sejuk, Alamendah adalah destinasi sempurna untuk melepas penat dari kehidupan kota yang sibuk."
+    },
+    "activities": {
+      "title": "Aktivitas & Pengalaman",
+      "subtitle": "Berbagai kegiatan menarik menanti Anda di Desa Wisata Alamendah, Kabupaten Bandung",
+      "culture": {
+        "title": "Wisata Budaya",
+        "description": "Saksikan pertunjukan seni budaya lokal dan pelajari tradisi yang telah turun temurun"
+      },
+      "nature": {
+        "title": "Wisata Alam",
+        "description": "Jelajahi keindahan alam dengan tracking, bird watching, dan aktivitas outdoor lainnya"
+      },
+      "education": {
+        "title": "Wisata Edukasi",
+        "description": "Program edukasi dan workshop untuk mengenal lebih dekat kehidupan pedesaan"
+      }
+    },
+    "accommodation": {
+      "title": "Akomodasi yang Nyaman",
+      "description": "Menginaplah dengan pemandangan yang menakjubkan langsung dari jendela kamar Anda. Rasakan kenyamanan fasilitas modern dengan nuansa tradisional yang autentik.",
+      "features": [
+        "Pemandangan pegunungan yang indah",
+        "Udara segar dan sejuk",
+        "Fasilitas lengkap dan modern"
+      ]
+    },
+    "cta": {
+      "title": "Siap untuk Petualangan yang Tak Terlupakan?",
+      "subtitle": "Hubungi kami sekarang dan rencanakan kunjungan Anda ke Desa Wisata Alamendah, Kabupaten Bandung",
+      "emailButton": "Email Kami",
+      "contactButton": "Hubungi Kami"
+    },
+    "errors": {
+      "noPackages": "Tidak ada paket yang ditemukan."
+    },
+    "search": {
+      "placeholder": "Cari paket berdasarkan nama atau deskripsi...",
+      "results": "Ditemukan {count} paket",
+      "forQuery": "untuk pencarian {query}",
+      "inCategory": "dalam kategori yang dipilih",
+      "clearFilters": "Hapus semua filter",
+      "noResults": "Tidak ada paket yang cocok dengan pencarian",
+      "tryDifferent": "Coba kata kunci atau filter yang berbeda"
+    }
+  },
+  "contact": {
+    "title": "Hubungi Kami",
+    "subtitle": "Hubungi kami untuk informasi lebih lanjut tentang paket wisata dan kuliner",
+    "contactInfo": {
+      "title": "Informasi Kontak",
+      "email": {
+        "label": "Email",
+        "value": "dawaladev@gmail.com",
+        "link": "Kirim email ke kami"
+      },
+      "phone": {
+        "label": "Telepon",
+        "value": "+62 xxx-xxxx-xxxx",
+        "hours": "Tersedia 08.00 - 17.00 WIB"
+      },
+      "location": {
+        "label": "Lokasi",
+        "value": "Desa Wisata Alamendah, Kabupaten Bandung, Jawa Barat, Indonesia",
+        "note": "Melayani wisatawan dari berbagai daerah"
+      }
+    }
+  },
+  "menu": {
+    "header": {
+      "title": "Paket Wisata & Kuliner Lengkap",
+      "subtitle": "Jelajahi semua pilihan paket wisata dan kuliner yang tersedia di Desa Wisata Alamendah, Kabupaten Bandung"
+    },
+    "content": {
+      "noPackages": "Tidak ada paket yang ditemukan.",
+      "noPackagesSubtitle": "Coba pilih kategori paket yang berbeda.",
+      "showingPackages": "Menampilkan {count} paket",
+      "inCategory": "dalam kategori {category}"
+    },
+    "cta": {
+      "title": "Siap untuk Berwisata?",
+      "subtitle": "Hubungi tim kami untuk merencanakan kunjungan dan mendapatkan penawaran khusus",
+      "button": "Hubungi Kami Sekarang"
+    }
+  },
+  "modal": {
+    "description": "Deskripsi",
+    "reservation": {
+      "title": "Informasi & Reservasi",
+      "button": "Reservasi Sekarang",
+      "emailSubject": "Reservasi Paket Wisata",
+      "emailBody": "Saya tertarik dengan paket: {packageName}"
+    }
+  },
+  "common": {
+    "loading": "Memuat...",
+    "error": "Terjadi kesalahan",
+    "retry": "Coba lagi"
+  },
+  "language": {
+    "switch": "Ganti Bahasa",
+    "indonesian": "Bahasa Indonesia",
+    "english": "English"
+  }
+}
