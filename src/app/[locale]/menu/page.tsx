@@ -11,7 +11,7 @@ import { JenisPaket, Makanan } from '@/types'
 import { getTexts, Texts } from '@/lib/texts'
 import { usePathname } from 'next/navigation'
 import { getCurrentLocale } from '@/lib/locale'
-import { getPackageName, getFoodDescription } from '@/lib/database-i18n'
+import { getFoodDescription } from '@/lib/database-i18n'
 
 export default function Menu() {
   const [makanan, setMakanan] = useState<Makanan[]>([])

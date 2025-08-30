@@ -25,12 +25,12 @@ export async function GET() {
       client.release()
     }
   } catch (error: unknown) {
-    const err = error as Error;
+    const err = error as Error & { code?: string; detail?: string };
     console.error('Database error in jenis-paket:', {
       message: err.message,
       name: err.name,
-      code: (err as any).code,
-      detail: (err as any).detail
+      code: err.code,
+      detail: err.detail
     })
     
     return NextResponse.json(
