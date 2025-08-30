@@ -47,10 +47,11 @@ export async function GET() {
       jenisPaketColumns: jenisPaketStructure.rows
     })
     
-  } catch (error: any) {
-    console.error('Database test error:', error)
+  } catch (error: unknown) {
+    const err = error as Error;
+    console.error('Database test error:', err)
     return NextResponse.json(
-      { error: 'Database test failed', details: error.message },
+      { error: 'Database test failed', details: err.message },
       { status: 500 }
     )
   }

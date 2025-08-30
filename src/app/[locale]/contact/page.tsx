@@ -3,14 +3,14 @@
 import { useState, useEffect } from 'react'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
-import { getTexts } from '@/lib/texts'
+import { getTexts, Texts } from '@/lib/texts'
 import { usePathname } from 'next/navigation'
 import { getCurrentLocale } from '@/lib/locale'
 
 export default function Contact() {
   const pathname = usePathname()
   const locale = getCurrentLocale(pathname)
-  const [texts, setTexts] = useState<any>(null)
+  const [texts, setTexts] = useState<Texts | null>(null)
 
   useEffect(() => {
     const loadTexts = async () => {

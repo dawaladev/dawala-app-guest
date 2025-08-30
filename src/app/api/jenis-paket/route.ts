@@ -24,19 +24,20 @@ export async function GET() {
     } finally {
       client.release()
     }
-  } catch (error: any) {
+  } catch (error: unknown) {
+    const err = error as Error;
     console.error('Database error in jenis-paket:', {
-      message: error.message,
-      name: error.name,
-      code: error.code,
-      detail: error.detail
+      message: err.message,
+      name: err.name,
+      code: (err as any).code,
+      detail: (err as any).detail
     })
     
     return NextResponse.json(
       { 
         error: 'Failed to fetch jenis paket', 
-        details: error instanceof Error ? error.message : 'Unknown error',
-        type: error.name || 'Unknown'
+        details: err.message || 'Unknown error',
+        type: err.name || 'Unknown'
       },
       { status: 500 }
     )

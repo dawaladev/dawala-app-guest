@@ -39,7 +39,7 @@ export async function POST(request: NextRequest) {
       const data = await response.json()
       
       if (data && data[0] && data[0][0] && data[0][0][0]) {
-        const translatedText = data[0].map((item: any) => item[0]).join('')
+        const translatedText = data[0].map((item: [string, string, string?, number?]) => item[0]).join('')
         
         return NextResponse.json({
           originalText: text,

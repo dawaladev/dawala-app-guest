@@ -8,7 +8,7 @@ import FilterPaket from '@/components/FilterPaket'
 import SearchBar from '@/components/SearchBar'
 import { LoadingCards } from '@/components/LoadingSpinner'
 import { JenisPaket, Makanan } from '@/types'
-import { getTexts } from '@/lib/texts'
+import { getTexts, Texts } from '@/lib/texts'
 import { usePathname } from 'next/navigation'
 import { getCurrentLocale } from '@/lib/locale'
 import { getPackageName, getFoodDescription } from '@/lib/database-i18n'
@@ -22,7 +22,7 @@ export default function Menu() {
   const [error, setError] = useState<string | null>(null)
   const pathname = usePathname()
   const locale = getCurrentLocale(pathname)
-  const [texts, setTexts] = useState<any>(null)
+  const [texts, setTexts] = useState<Texts | null>(null)
 
   useEffect(() => {
     const loadTexts = async () => {

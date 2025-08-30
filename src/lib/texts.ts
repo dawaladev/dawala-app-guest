@@ -73,6 +73,15 @@ export interface Texts {
       emailButton: string
       contactButton: string
     }
+    search: {
+      placeholder: string
+      results: string
+      forQuery: string
+      inCategory: string
+      clearFilters: string
+      noResults: string
+      tryDifferent: string
+    }
     errors: {
       noPackages: string
     }
@@ -278,6 +287,15 @@ export const getTexts = async (locale: 'id' | 'en' = 'id'): Promise<Texts> => {
         "subtitle": "Hubungi kami sekarang dan rencanakan kunjungan Anda ke Desa Wisata Alamendah, Kabupaten Bandung",
         "emailButton": "Email Kami",
         "contactButton": "Hubungi Kami"
+      },
+      "search": {
+        "placeholder": "Cari paket...",
+        "results": "Menampilkan {count} paket",
+        "forQuery": "untuk \"{query}\"",
+        "inCategory": "di kategori yang dipilih",
+        "clearFilters": "Hapus semua filter",
+        "noResults": "Tidak ada paket yang cocok",
+        "tryDifferent": "Coba kata kunci atau filter yang berbeda"
       },
       "errors": {
         "noPackages": "Tidak ada paket yang ditemukan."

@@ -9,7 +9,7 @@ export async function GET(request: NextRequest) {
     console.log('API makanan called - using direct PostgreSQL connection')
     
     let query: string
-    let queryParams: any[] = []
+    let queryParams: (string | number)[] = []
     
     if (jenisPaketId) {
       query = `
@@ -46,16 +46,17 @@ export async function GET(request: NextRequest) {
     console.log(`Returning makanan data: ${result.rows.length} items`)
     return NextResponse.json(result.rows)
     
-  } catch (error: any) {
+  } catch (error: unknown) {
+    const err = error as Error;
     console.error('Database error in makanan:', {
-      message: error.message,
-      name: error.name,
-      code: error.code,
-      detail: error.detail
+      message: err.message,
+      name: err.name,
+      code: (err as any).code,
+      detail: (err as any).detail
     })
     
     return NextResponse.json(
-      { error: 'Failed to fetch makanan data', details: error.message },
+      { error: 'Failed to fetch makanan data', details: err.message },
       { status: 500 }
     )
   }
