@@ -27,7 +27,7 @@ export function getLocalizedDescription(makanan: { deskripsi: string; deskripsiE
 /**
  * Get localized package name with fallback
  */
-export function getPackageName(paket: any, locale: Locale): string {
+export function getPackageName(paket: { nama_paket?: string; namaPaket?: string; nama_paket_en?: string; namaPaketEn?: string }, locale: Locale): string {
   if (locale === 'id') {
     return paket.nama_paket || paket.namaPaket || 'Unknown Package'
   }
@@ -38,7 +38,7 @@ export function getPackageName(paket: any, locale: Locale): string {
 /**
  * Get localized food description with fallback
  */
-export function getFoodDescription(makanan: any, locale: Locale): string {
+export function getFoodDescription(makanan: { deskripsi?: string; deskripsi_en?: string; deskripsiEn?: string }, locale: Locale): string {
   if (locale === 'id') {
     return makanan.deskripsi || 'No description available'
   }

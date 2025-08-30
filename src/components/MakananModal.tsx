@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react'
 import { Makanan } from '@/types'
 import Image from 'next/image'
-import { getTexts } from '@/lib/texts'
+import { getTexts, Texts } from '@/lib/texts'
 import { getSupabaseImageUrl } from '@/lib/config'
 import { usePathname } from 'next/navigation'
 import { getCurrentLocale } from '@/lib/locale'
@@ -21,7 +21,7 @@ export default function MakananModal({ makanan, isOpen, onClose }: MakananModalP
   const [isFullscreen, setIsFullscreen] = useState(false)
   const pathname = usePathname()
   const locale = getCurrentLocale(pathname)
-  const [texts, setTexts] = useState<any>(null)
+  const [texts, setTexts] = useState<Texts | null>(null)
 
   useEffect(() => {
     const loadTexts = async () => {
@@ -38,7 +38,7 @@ export default function MakananModal({ makanan, isOpen, onClose }: MakananModalP
   };
 
   // Helper: parse foto field (same as in MakananCard)
-  const parsePhotoArray = (foto: any) => {
+  const parsePhotoArray = (foto: string | string[]): string[] => {
     if (!foto) return [];
     
     // If it's a string that looks like JSON, try to parse it
@@ -48,7 +48,7 @@ export default function MakananModal({ makanan, isOpen, onClose }: MakananModalP
         try {
           const parsed = JSON.parse(foto);
           if (Array.isArray(parsed)) {
-            return parsed.filter((f: any) => 
+            return parsed.filter((f: string) => 
               typeof f === 'string' && (f.startsWith('http') || f.startsWith('data:image'))
             );
           }
@@ -66,7 +66,7 @@ export default function MakananModal({ makanan, isOpen, onClose }: MakananModalP
     }
     
     if (Array.isArray(foto)) {
-      return foto.filter((f: any) => 
+      return foto.filter((f: string) => 
         typeof f === 'string' && (f.startsWith('http') || f.startsWith('data:image'))
       );
     }
@@ -130,8 +130,9 @@ export default function MakananModal({ makanan, isOpen, onClose }: MakananModalP
                   fill
                   className="object-cover hover:scale-105 transition-transform duration-300"
                   sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 60vw"
-                  onError={(e: any) => {
-                    e.target.src = '/placeholder-food.jpg';
+                  onError={(e: React.SyntheticEvent<HTMLImageElement, Event>) => {
+                    const target = e.target as HTMLImageElement;
+                    target.src = '/placeholder-food.jpg';
                   }}
                 />
                 {/* Click to expand indicator */}
@@ -237,8 +238,9 @@ export default function MakananModal({ makanan, isOpen, onClose }: MakananModalP
                 fill
                 className="object-contain"
                 sizes="100vw"
-                onError={(e: any) => {
-                  e.target.src = '/placeholder-food.jpg';
+                onError={(e: React.SyntheticEvent<HTMLImageElement, Event>) => {
+                  const target = e.target as HTMLImageElement;
+                  target.src = '/placeholder-food.jpg';
                 }}
               />
             </div>

@@ -147,7 +147,7 @@ export interface Texts {
 const translationCache = new Map<string, string>()
 
 // Function to generate English translations automatically
-const generateEnglishTranslations = async (idTexts: any): Promise<any> => {
+const generateEnglishTranslations = async (idTexts: Texts): Promise<Texts> => {
   const translateField = async (text: string): Promise<string> => {
     if (typeof text !== 'string' || text.length < 3) return text
     
@@ -176,7 +176,7 @@ const generateEnglishTranslations = async (idTexts: any): Promise<any> => {
     }
   }
 
-  const translateObject = async (obj: any): Promise<any> => {
+  const translateObject = async (obj: unknown): Promise<unknown> => {
     if (typeof obj === 'string') {
       return await translateField(obj)
     }
@@ -184,7 +184,7 @@ const generateEnglishTranslations = async (idTexts: any): Promise<any> => {
       return Promise.all(obj.map(item => translateObject(item)))
     }
     if (obj && typeof obj === 'object') {
-      const result: any = {}
+      const result: Record<string, unknown> = {}
       for (const [key, value] of Object.entries(obj)) {
         // Skip translation for images object to prevent path corruption
         if (key === 'images') {
@@ -198,7 +198,7 @@ const generateEnglishTranslations = async (idTexts: any): Promise<any> => {
     return obj
   }
 
-  return await translateObject(idTexts)
+  return await translateObject(idTexts) as Texts
 }
 
 // Function to get texts with type safety
