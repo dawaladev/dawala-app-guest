@@ -8,6 +8,7 @@ import { getSupabaseImageUrl } from '@/lib/config'
 import { usePathname } from 'next/navigation'
 import { getCurrentLocale } from '@/lib/locale'
 import { getFoodDescription } from '@/lib/database-i18n'
+import { useSettings } from '@/hooks/useSettings'
 
 interface MakananModalProps {
   makanan: Makanan | null
@@ -23,6 +24,7 @@ export default function MakananModal({ makanan, isOpen, onClose }: MakananModalP
   const pathname = usePathname()
   const locale = getCurrentLocale(pathname)
   const [texts, setTexts] = useState<Texts | null>(null)
+  const { settings } = useSettings()
 
   useEffect(() => {
     const loadTexts = async () => {
@@ -52,15 +54,48 @@ export default function MakananModal({ makanan, isOpen, onClose }: MakananModalP
   // Generate WhatsApp message
   const generateWhatsAppMessage = () => {
     const message = `Halo, saya tertarik untuk memesan:
-    
-📦 Paket: ${makanan.namaMakanan}
-🔢 Jumlah: ${quantity} paket
-💰 Harga satuan: Rp ${makanan.harga.toLocaleString('id-ID')}
-💵 Total harga: Rp ${totalPrice.toLocaleString('id-ID')}
+
+Paket: ${makanan.namaMakanan}
+Jumlah: ${quantity} paket
+Harga satuan: Rp ${makanan.harga.toLocaleString('id-ID')}
+Total harga: Rp ${totalPrice.toLocaleString('id-ID')}
 
 Mohon informasi lebih lanjut untuk pemesanan. Terima kasih!`
     
     return encodeURIComponent(message)
+  }
+
+  // Generate WhatsApp URL that works better on mobile
+  const generateWhatsAppURL = () => {
+    const phoneNumber = cleanPhoneNumber(settings?.noTelp || '628123456789')
+    const message = generateWhatsAppMessage()
+    
+    // Use WhatsApp Web for better message reliability
+    return `https://web.whatsapp.com/send?phone=${phoneNumber}&text=${message}`
+  }
+
+  // Helper function to clean phone number for WhatsApp
+  const cleanPhoneNumber = (phone: string) => {
+    if (!phone) return '628123456789'
+    
+    // Remove all non-digit characters
+    let cleaned = phone.replace(/\D/g, '')
+    
+    // If starts with 08, replace with 628
+    if (cleaned.startsWith('08')) {
+      cleaned = '62' + cleaned.substring(1)
+    }
+    // If starts with 8, add 62
+    else if (cleaned.startsWith('8')) {
+      cleaned = '62' + cleaned
+    }
+    // If already starts with 62, keep as is
+    else if (!cleaned.startsWith('62')) {
+      // If it's some other format, default to 628123456789
+      cleaned = '628123456789'
+    }
+    
+    return cleaned
   }
 
   // Generate Email message
@@ -289,7 +324,7 @@ Mohon informasi lebih lanjut untuk pemesanan.`
                 <div className="space-x-2">
                   {/* WhatsApp Button */}
                   <a 
-                    href={`https://wa.me/628123456789?text=${generateWhatsAppMessage()}`}
+                    href={generateWhatsAppURL()}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-flex items-center bg-green-500 text-white px-4 sm:px-6 py-2.5 sm:py-3 rounded-lg font-semibold hover:bg-green-600 transition-colors text-sm sm:text-base w-full sm:w-auto justify-center"
@@ -302,7 +337,7 @@ Mohon informasi lebih lanjut untuk pemesanan.`
                   
                   {/* Email Button */}
                   <a 
-                    href={`mailto:dawaladev@gmail.com?subject=Reservasi Paket ${makanan.namaMakanan}&body=${generateEmailMessage()}`}
+                    href={`mailto:${settings?.email || 'dawaladev@gmail.com'}?subject=Reservasi Paket ${makanan.namaMakanan}&body=${generateEmailMessage()}`}
                     className="inline-flex items-center bg-blue-600 text-white px-4 sm:px-6 py-2.5 sm:py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors text-sm sm:text-base w-full sm:w-auto justify-center"
                   >
                     <svg className="w-4 h-4 sm:w-5 sm:h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">

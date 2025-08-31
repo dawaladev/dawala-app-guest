@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { getTexts, Texts } from '@/lib/texts'
 import { getCurrentLocale } from '@/lib/locale'
+import { useSettings } from '@/hooks/useSettings'
 
 interface FooterProps {
   locale?: 'id' | 'en'
@@ -11,6 +12,7 @@ interface FooterProps {
 
 export default function Footer({ locale }: FooterProps) {
   const [texts, setTexts] = useState<Texts | null>(null)
+  const { settings } = useSettings()
 
   useEffect(() => {
     // Use provided locale or get from localStorage
@@ -56,8 +58,8 @@ export default function Footer({ locale }: FooterProps) {
           <div>
             <h3 className="text-lg font-bold mb-3 sm:mb-4">{texts.footer.contactInfo.title}</h3>
             <div className="space-y-2 text-gray-300 text-sm sm:text-base">
-              <p className="break-words">Email: {texts.footer.contactInfo.email}</p>
-              <p>Phone: {texts.footer.contactInfo.phone}</p>
+              <p className="break-words">Email: {settings?.email || 'dawaladev@gmail.com'}</p>
+              <p>Phone: {settings?.noTelp ? `${settings.noTelp}` : '628123456789'}</p>
               <p>Lokasi: {texts.footer.contactInfo.location}</p>
             </div>
           </div>

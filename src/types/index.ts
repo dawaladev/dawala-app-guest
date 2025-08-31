@@ -5,7 +5,6 @@ export interface JenisPaket {
   namaPaketEn?: string;
 }
 
-
 export interface Makanan {
   id: number;
   namaMakanan: string;
@@ -15,4 +14,9 @@ export interface Makanan {
   harga: number;
   jenisPaketId: number;
   jenisPaket?: JenisPaket;
+}
+
+export interface Settings {
+  email: string;
+  noTelp: string;
 }

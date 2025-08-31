@@ -6,11 +6,13 @@ import Footer from '@/components/Footer'
 import { getTexts, Texts } from '@/lib/texts'
 import { usePathname } from 'next/navigation'
 import { getCurrentLocale } from '@/lib/locale'
+import { useSettings } from '@/hooks/useSettings'
 
 export default function Contact() {
   const pathname = usePathname()
   const locale = getCurrentLocale(pathname)
   const [texts, setTexts] = useState<Texts | null>(null)
+  const { settings } = useSettings()
 
   useEffect(() => {
     const loadTexts = async () => {
@@ -62,9 +64,9 @@ export default function Contact() {
                     </div>
                     <div className="flex-1 min-w-0">
                       <h3 className="text-base sm:text-lg font-medium text-gray-800">{texts.contact.contactInfo.email.label}</h3>
-                      <p className="text-sm sm:text-base text-gray-600 break-words">{texts.contact.contactInfo.email.value}</p>
+                      <p className="text-sm sm:text-base text-gray-600 break-words">{settings?.email || texts.contact.contactInfo.email.value}</p>
                       <a 
-                        href={`mailto:${texts.contact.contactInfo.email.value}`}
+                        href={`mailto:${settings?.email || texts.contact.contactInfo.email.value}`}
                         className="text-green-600 hover:text-green-700 text-sm inline-block mt-1"
                       >
                         {texts.contact.contactInfo.email.link}
@@ -82,7 +84,7 @@ export default function Contact() {
                     </div>
                     <div className="flex-1 min-w-0">
                       <h3 className="text-base sm:text-lg font-medium text-gray-800">{texts.contact.contactInfo.phone.label}</h3>
-                      <p className="text-sm sm:text-base text-gray-600">{texts.contact.contactInfo.phone.value}</p>
+                      <p className="text-sm sm:text-base text-gray-600">{settings?.noTelp || texts.contact.contactInfo.phone.value}</p>
                       <p className="text-gray-500 text-sm">{texts.contact.contactInfo.phone.hours}</p>
                     </div>
                   </div>
