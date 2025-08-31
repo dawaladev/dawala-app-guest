@@ -21,6 +21,7 @@ export default function MakananModal({ makanan, isOpen, onClose }: MakananModalP
   const [currentImageIndex, setCurrentImageIndex] = useState(0)
   const [isFullscreen, setIsFullscreen] = useState(false)
   const [quantity, setQuantity] = useState(1)
+  const [isMobile, setIsMobile] = useState(false)
   const pathname = usePathname()
   const locale = getCurrentLocale(pathname)
   const [texts, setTexts] = useState<Texts | null>(null)
@@ -33,6 +34,22 @@ export default function MakananModal({ makanan, isOpen, onClose }: MakananModalP
     }
     loadTexts()
   }, [locale])
+
+  // Detect screen size for responsive WhatsApp link
+  useEffect(() => {
+    const checkScreenSize = () => {
+      setIsMobile(window.innerWidth < 1024)
+    }
+    
+    // Initial check
+    checkScreenSize()
+    
+    // Listen for window resize
+    window.addEventListener('resize', checkScreenSize)
+    
+    // Cleanup
+    return () => window.removeEventListener('resize', checkScreenSize)
+  }, [])
 
   // Reset quantity when modal opens with new makanan
   useEffect(() => {
@@ -65,13 +82,18 @@ Mohon informasi lebih lanjut untuk pemesanan. Terima kasih!`
     return encodeURIComponent(message)
   }
 
-  // Generate WhatsApp URL that works better on mobile
+  // Generate WhatsApp URL with responsive logic
   const generateWhatsAppURL = () => {
     const phoneNumber = cleanPhoneNumber(settings?.noTelp || '628123456789')
     const message = generateWhatsAppMessage()
     
-    // Use WhatsApp Web for better message reliability
-    return `https://web.whatsapp.com/send?phone=${phoneNumber}&text=${message}`
+    if (isMobile) {
+      // Mobile: Use WhatsApp app
+      return `https://wa.me/${phoneNumber}?text=${message}`
+    } else {
+      // Desktop: Use WhatsApp Web for better message reliability
+      return `https://web.whatsapp.com/send?phone=${phoneNumber}&text=${message}`
+    }
   }
 
   // Helper function to clean phone number for WhatsApp
@@ -284,18 +306,18 @@ Mohon informasi lebih lanjut untuk pemesanan.`
                     <div className="flex items-center border border-gray-300 rounded-lg">
                       <button
                         onClick={decreaseQuantity}
-                        className="p-2 hover:bg-gray-100 transition-colors"
+                        className="p-2 text-gray-800 hover:bg-gray-100 transition-colors cursor-pointer"
                       >
-                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg className="w-4 h-4 text-gray-800" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20 12H4" />
                         </svg>
                       </button>
-                      <span className="px-4 py-2 font-medium">{quantity}</span>
+                      <span className="px-4 py-2 font-medium text-gray-800">{quantity}</span>
                       <button
                         onClick={increaseQuantity}
-                        className="p-2 hover:bg-gray-100 transition-colors"
+                        className="p-2 text-gray-800 hover:bg-gray-100 transition-colors cursor-pointer"
                       >
-                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg className="w-4 h-4 text-gray-800" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
                         </svg>
                       </button>
@@ -321,7 +343,7 @@ Mohon informasi lebih lanjut untuk pemesanan.`
               
               <div className="border-t pt-4 sm:pt-6">
                 <h4 className="font-semibold text-gray-800 mb-3 sm:mb-4 text-sm sm:text-base">{texts.modal.reservation.title}</h4>
-                <div className="space-x-2">
+                <div className="space-x-2 space-y-2">
                   {/* WhatsApp Button */}
                   <a 
                     href={generateWhatsAppURL()}
