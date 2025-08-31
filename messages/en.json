@@ -123,6 +123,9 @@
       "title": "Ready to Travel?",
       "subtitle": "Contact our team to plan your visit and get special offers",
       "button": "Contact Us Now"
+    },
+    "filter": {
+      "allPackages": "All Packages"
     }
   },
   "modal": {

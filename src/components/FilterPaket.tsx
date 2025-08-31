@@ -1,5 +1,6 @@
 import { JenisPaket } from '@/types'
 import { getPackageName } from '@/lib/database-i18n'
+import { getTexts } from '@/lib/texts'
 
 interface FilterPaketProps {
   jenisPaket: JenisPaket[]
@@ -8,7 +9,9 @@ interface FilterPaketProps {
   locale?: 'id' | 'en'
 }
 
-export default function FilterPaket({ jenisPaket, selectedPaket, onSelectPaket, locale = 'id' }: FilterPaketProps) {
+export default async function FilterPaket({ jenisPaket, selectedPaket, onSelectPaket, locale = 'id' }: FilterPaketProps) {
+  const texts = await getTexts(locale)
+  
   return (
     <div className="mb-6 sm:mb-8">
       <h3 className="text-base sm:text-lg font-semibold text-gray-800 mb-3 sm:mb-4 px-4 sm:px-0">Filter berdasarkan Kategori</h3>
@@ -21,7 +24,7 @@ export default function FilterPaket({ jenisPaket, selectedPaket, onSelectPaket, 
               : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
           }`}
         >
-          Semua Paket
+          {texts.menu.filter.allPackages}
         </button>
         {jenisPaket.map((paket) => (
           <button

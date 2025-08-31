@@ -123,6 +123,9 @@
       "title": "Siap untuk Berwisata?",
       "subtitle": "Hubungi tim kami untuk merencanakan kunjungan dan mendapatkan penawaran khusus",
       "button": "Hubungi Kami Sekarang"
+    },
+    "filter": {
+      "allPackages": "Semua Paket"
     }
   },
   "modal": {

@@ -124,6 +124,9 @@ export interface Texts {
       subtitle: string
       button: string
     }
+    filter: {
+      allPackages: string
+    }
   }
   modal: {
     description: string
@@ -338,6 +341,9 @@ export const getTexts = async (locale: 'id' | 'en' = 'id'): Promise<Texts> => {
         "title": "Siap untuk Berwisata?",
         "subtitle": "Hubungi tim kami untuk merencanakan kunjungan dan mendapatkan penawaran khusus",
         "button": "Hubungi Kami Sekarang"
+      },
+      "filter": {
+        "allPackages": "Semua Paket"
       }
     },
     "modal": {
@@ -498,6 +504,9 @@ export const getTexts = async (locale: 'id' | 'en' = 'id'): Promise<Texts> => {
             title: "Ready to Travel?",
             subtitle: "Contact our team to plan your visit and get special offers",
             button: "Contact Us Now"
+          },
+          filter: {
+            allPackages: "All Packages"
           }
         },
         modal: {
