@@ -102,7 +102,7 @@ export default function MakananModal({ makanan, isOpen, onClose }: MakananModalP
   }
 
   return (
-    <div className="fixed inset-0 backdrop-blur-sm bg-black bg-opacity-50 flex items-center justify-center z-50 p-2 sm:p-4">
+    <div className="fixed inset-0 backdrop-blur-md flex items-center justify-center z-50 p-2 sm:p-4">
       <div className="rounded-xl bg-white shadow-xl w-full max-w-4xl max-h-[95vh] overflow-hidden">
         <div className="bg-white rounded-xl overflow-y-auto max-h-[95vh]">
           {/* Header */}
@@ -220,7 +220,7 @@ export default function MakananModal({ makanan, isOpen, onClose }: MakananModalP
 
       {/* Fullscreen Image Viewer */}
       {isFullscreen && (
-        <div className="fixed inset-0 backdrop-blur-sm bg-black bg-opacity-95 flex items-center justify-center z-[60]">
+        <div className="fixed inset-0 backdrop-blur-lg bg-black bg-opacity-80 flex items-center justify-center z-[60]">
           <div className="relative w-full h-full flex items-center justify-center">
             {/* Close button */}
             <button
