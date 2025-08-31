@@ -324,7 +324,7 @@ Mohon informasi lebih lanjut untuk pemesanan.`
             {/* Close button */}
             <button
               onClick={closeFullscreen}
-              className="absolute top-2 sm:top-4 right-2 sm:right-4 bg-green-600 text-white text-2xl sm:text-4xl font-bold hover:bg-green-700 rounded-full w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center z-10"
+              className="absolute top-2 sm:top-4 right-2 sm:right-4 bg-green-600 text-white text-2xl sm:text-4xl font-bold hover:bg-green-700 rounded-full w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center z-10 cursor-pointer"
             >
               ×
             </button>
@@ -349,7 +349,7 @@ Mohon informasi lebih lanjut untuk pemesanan.`
               <>
                 <button
                   onClick={prevImage}
-                  className="absolute left-2 sm:left-4 top-1/2 transform -translate-y-1/2 bg-green-600 hover:bg-green-700 text-white rounded-full p-2 sm:p-4 transition-all"
+                  className="absolute left-2 sm:left-4 top-1/2 transform -translate-y-1/2 bg-green-600 hover:bg-green-700 text-white rounded-full p-2 sm:p-4 transition-all cursor-pointer"
                 >
                   <svg className="w-5 h-5 sm:w-8 sm:h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
@@ -357,7 +357,7 @@ Mohon informasi lebih lanjut untuk pemesanan.`
                 </button>
                 <button
                   onClick={nextImage}
-                  className="absolute right-2 sm:right-4 top-1/2 transform -translate-y-1/2 bg-green-600 hover:bg-green-700 text-white rounded-full p-2 sm:p-4 transition-all"
+                  className="absolute right-2 sm:right-4 top-1/2 transform -translate-y-1/2 bg-green-600 hover:bg-green-700 text-white rounded-full p-2 sm:p-4 transition-all cursor-pointer"
                 >
                   <svg className="w-5 h-5 sm:w-8 sm:h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
@@ -380,7 +380,7 @@ Mohon informasi lebih lanjut untuk pemesanan.`
                   <button
                     key={index}
                     onClick={() => goToImage(index)}
-                    className={`w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full transition-all ${
+                    className={`w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full transition-all cursor-pointer ${
                       index === currentImageIndex ? 'bg-white' : 'bg-white bg-opacity-50 hover:bg-opacity-75'
                     }`}
                   />
