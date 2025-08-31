@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 import MakananCard from '@/components/MakananCard'
+import MakananModal from '@/components/MakananModal'
 import FilterPaket from '@/components/FilterPaket'
 import SearchBar from '@/components/SearchBar'
 import { LoadingCards } from '@/components/LoadingSpinner'
@@ -20,6 +21,8 @@ export default function Menu() {
   const [searchQuery, setSearchQuery] = useState<string>('')
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
+  const [selectedMakanan, setSelectedMakanan] = useState<Makanan | null>(null)
+  const [isModalOpen, setIsModalOpen] = useState(false)
   const pathname = usePathname()
   const locale = getCurrentLocale(pathname)
   const [texts, setTexts] = useState<Texts | null>(null)
@@ -89,6 +92,17 @@ export default function Menu() {
     
     return matchesCategory && matchesSearch
   })
+
+  // Handle modal
+  const handleCardClick = (makananItem: Makanan) => {
+    setSelectedMakanan(makananItem)
+    setIsModalOpen(true)
+  }
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false)
+    setSelectedMakanan(null)
+  }
 
   if (!texts) {
     return (
@@ -195,7 +209,12 @@ export default function Menu() {
                   
                   <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                     {filteredMakanan.map((item) => (
-                      <MakananCard key={item.id} makanan={item} locale={locale} />
+                      <MakananCard 
+                        key={item.id} 
+                        makanan={item} 
+                        locale={locale}
+                        onClick={() => handleCardClick(item)}
+                      />
                     ))}
                   </div>
                 </>
@@ -224,6 +243,13 @@ export default function Menu() {
       </section>
 
       <Footer locale={locale} />
+
+      {/* Modal */}
+      <MakananModal 
+        makanan={selectedMakanan}
+        isOpen={isModalOpen}
+        onClose={handleCloseModal}
+      />
     </div>
   )
 }
