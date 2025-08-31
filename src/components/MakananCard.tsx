@@ -83,10 +83,10 @@ export default function MakananCard({ makanan, onClick, locale = 'id' }: Makanan
   console.log('MakananCard foto:', makanan.foto);
   return (
     <div 
-      className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-all duration-300 cursor-pointer transform hover:scale-105"
+      className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-all duration-300 cursor-pointer transform hover:scale-105 h-full flex flex-col"
       onClick={onClick}
     >
-      <div className="relative h-48 sm:h-52 w-full">
+      <div className="relative h-48 sm:h-52 w-full flex-shrink-0">
         {(() => {
           // Always use first valid image string
           let imageUrl = getFirstValidImage(makanan.foto);
@@ -106,14 +106,14 @@ export default function MakananCard({ makanan, onClick, locale = 'id' }: Makanan
           );
         })()}
       </div>
-      <div className="p-4 sm:p-5">
+      <div className="p-4 sm:p-5 flex flex-col flex-grow">
         <h3 className="font-semibold text-base sm:text-lg text-gray-800 mb-2 line-clamp-1">
           {makanan.namaMakanan}
         </h3>
-        <p className="text-gray-600 text-sm sm:text-base mb-3 line-clamp-2">
+        <p className="text-gray-600 text-sm sm:text-base mb-3 line-clamp-3 flex-grow">
           {getFoodDescription(makanan, locale)}
         </p>
-        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 sm:gap-0">
+        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 sm:gap-0 mt-auto">
           <span className="text-lg sm:text-xl font-bold text-green-600">
             {formatRupiah(makanan.harga)}
           </span>
