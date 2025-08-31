@@ -157,6 +157,7 @@ export default function Menu() {
                 selectedPaket={selectedPaket}
                 onSelectPaket={setSelectedPaket}
                 locale={locale}
+                allPackagesText={texts?.menu?.filter?.allPackages || "Semua Paket"}
               />
 
               {filteredMakanan.length === 0 ? (

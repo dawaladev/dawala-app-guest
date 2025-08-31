@@ -195,6 +195,7 @@ export default function Home() {
                     selectedPaket={selectedPaket}
                     onSelectPaket={setSelectedPaket}
                     locale={locale}
+                    allPackagesText={texts?.menu?.filter?.allPackages || "Semua Paket"}
                   />
                 </div>
 

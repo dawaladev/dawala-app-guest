@@ -215,6 +215,14 @@ const generateEnglishTranslations = async (idTexts: Texts): Promise<Texts> => {
 
 // Function to get texts with type safety
 export const getTexts = async (locale: 'id' | 'en' = 'id'): Promise<Texts> => {
+  // Safe access to config with fallbacks
+  const safeConfig = {
+    contact: {
+      email: (typeof window !== 'undefined' ? process.env.NEXT_PUBLIC_CONTACT_EMAIL : process.env.NEXT_PUBLIC_CONTACT_EMAIL) || 'dawaladev@gmail.com',
+      phone: (typeof window !== 'undefined' ? process.env.NEXT_PUBLIC_CONTACT_PHONE : process.env.NEXT_PUBLIC_CONTACT_PHONE) || '+62 xxx-xxxx-xxxx'
+    }
+  }
+  
   // Import JSON data directly to avoid Turbopack HMR issues
   const textsDataId = {
     "header": {
@@ -232,8 +240,8 @@ export const getTexts = async (locale: 'id' | 'en' = 'id'): Promise<Texts> => {
       "subDescription": "Nikmati keindahan alam dan cita rasa kuliner lokal yang autentik di Jawa Barat.",
       "contactInfo": {
         "title": "Informasi Kontak",
-        "email": config.contact.email,
-        "phone": config.contact.phone,
+        "email": safeConfig.contact.email,
+        "phone": safeConfig.contact.phone,
         "location": "Desa Wisata Alamendah, Kab. Bandung, Indonesia"
       },
       "quickLinks": {
@@ -311,12 +319,12 @@ export const getTexts = async (locale: 'id' | 'en' = 'id'): Promise<Texts> => {
         "title": "Informasi Kontak",
         "email": {
           "label": "Email",
-          "value": config.contact.email,
+          "value": safeConfig.contact.email,
           "link": "Kirim email ke kami"
         },
         "phone": {
           "label": "Telepon",
-          "value": config.contact.phone,
+          "value": safeConfig.contact.phone,
           "hours": "Tersedia 08.00 - 17.00 WIB"
         },
         "location": {
@@ -474,12 +482,12 @@ export const getTexts = async (locale: 'id' | 'en' = 'id'): Promise<Texts> => {
             title: "Contact Information",
             email: {
               label: "Email",
-              value: config.contact.email,
+              value: safeConfig.contact.email,
               link: "Send us an email"
             },
             phone: {
               label: "Phone",
-              value: config.contact.phone,
+              value: safeConfig.contact.phone,
               hours: "Available 08:00 - 17:00 WIB"
             },
             location: {
