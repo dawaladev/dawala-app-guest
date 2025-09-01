@@ -365,16 +365,7 @@ Mohon informasi lebih lanjut untuk pemesanan.`
                     Pesan via WhatsApp
                   </a>
                   
-                  {/* Email Button */}
-                  <a 
-                    href={`mailto:${settings?.email || 'dawaladev@gmail.com'}?subject=Reservasi Paket ${makanan.namaMakanan}&body=${generateEmailMessage()}`}
-                    className="inline-flex items-center bg-blue-600 text-white px-4 sm:px-6 py-2.5 sm:py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors text-sm sm:text-base w-full sm:w-auto justify-center"
-                  >
-                    <svg className="w-4 h-4 sm:w-5 sm:h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                    </svg>
-                    Pesan via Email
-                  </a>
+                  
                 </div>
               </div>
             </div>

@@ -12,6 +12,7 @@ export default function Contact() {
   const pathname = usePathname()
   const locale = getCurrentLocale(pathname)
   const [texts, setTexts] = useState<Texts | null>(null)
+  const [isMobile, setIsMobile] = useState(false)
   const { settings } = useSettings()
 
   useEffect(() => {
@@ -21,6 +22,47 @@ export default function Contact() {
     }
     loadTexts()
   }, [locale])
+
+  // Detect screen size for responsive WhatsApp link
+  useEffect(() => {
+    const checkScreenSize = () => {
+      setIsMobile(window.innerWidth < 1024)
+    }
+    
+    checkScreenSize()
+    window.addEventListener('resize', checkScreenSize)
+    
+    return () => window.removeEventListener('resize', checkScreenSize)
+  }, [])
+
+  // Helper function to clean phone number for WhatsApp
+  const cleanPhoneNumber = (phone: string) => {
+    if (!phone) return '628123456789'
+    
+    let cleaned = phone.replace(/\D/g, '')
+    
+    if (cleaned.startsWith('08')) {
+      cleaned = '62' + cleaned.substring(1)
+    } else if (cleaned.startsWith('8')) {
+      cleaned = '62' + cleaned
+    } else if (!cleaned.startsWith('62')) {
+      cleaned = '628123456789'
+    }
+    
+    return cleaned
+  }
+
+  // Generate WhatsApp URL with responsive logic
+  const generateWhatsAppURL = () => {
+    const phoneNumber = cleanPhoneNumber(settings?.noTelp || '628123456789')
+    const message = encodeURIComponent(`Halo, saya ingin mengetahui informasi lebih lanjut mengenai Desa Wisata Alamendah.`)
+    
+    if (isMobile) {
+      return `https://wa.me/${phoneNumber}?text=${message}`
+    } else {
+      return `https://web.whatsapp.com/send?phone=${phoneNumber}&text=${message}`
+    }
+  }
   if (!texts) {
     return (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
@@ -66,10 +108,12 @@ export default function Contact() {
                       <h3 className="text-base sm:text-lg font-medium text-gray-800">{texts.contact.contactInfo.email.label}</h3>
                       <p className="text-sm sm:text-base text-gray-600 break-words">{settings?.email || texts.contact.contactInfo.email.value}</p>
                       <a 
-                        href={`mailto:${settings?.email || texts.contact.contactInfo.email.value}`}
+                        href={generateWhatsAppURL()}
+                        target="_blank"
+                        rel="noopener noreferrer"
                         className="text-green-600 hover:text-green-700 text-sm inline-block mt-1"
                       >
-                        {texts.contact.contactInfo.email.link}
+                        Hubungi via WhatsApp
                       </a>
                     </div>
                   </div>

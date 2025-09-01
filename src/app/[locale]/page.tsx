@@ -14,6 +14,7 @@ import { JenisPaket, Makanan } from '@/types'
 import { getTexts, Texts } from '@/lib/texts'
 import { getCurrentLocale } from '@/lib/locale'
 import { getFoodDescription } from '@/lib/database-i18n'
+import { useSettings } from '@/hooks/useSettings'
 
 
 export default function Home() {
@@ -25,9 +26,11 @@ export default function Home() {
   const [error, setError] = useState<string | null>(null)
   const [selectedMakanan, setSelectedMakanan] = useState<Makanan | null>(null)
   const [isModalOpen, setIsModalOpen] = useState(false)
+  const [isMobile, setIsMobile] = useState(false)
   const pathname = usePathname()
   const locale = getCurrentLocale(pathname)
   const [texts, setTexts] = useState<Texts | null>(null)
+  const { settings } = useSettings()
 
   useEffect(() => {
     const loadTexts = async () => {
@@ -36,6 +39,47 @@ export default function Home() {
     }
     loadTexts()
   }, [locale])
+
+  // Detect screen size for responsive WhatsApp link
+  useEffect(() => {
+    const checkScreenSize = () => {
+      setIsMobile(window.innerWidth < 1024)
+    }
+    
+    checkScreenSize()
+    window.addEventListener('resize', checkScreenSize)
+    
+    return () => window.removeEventListener('resize', checkScreenSize)
+  }, [])
+
+  // Helper function to clean phone number for WhatsApp
+  const cleanPhoneNumber = (phone: string) => {
+    if (!phone) return '628123456789'
+    
+    let cleaned = phone.replace(/\D/g, '')
+    
+    if (cleaned.startsWith('08')) {
+      cleaned = '62' + cleaned.substring(1)
+    } else if (cleaned.startsWith('8')) {
+      cleaned = '62' + cleaned
+    } else if (!cleaned.startsWith('62')) {
+      cleaned = '628123456789'
+    }
+    
+    return cleaned
+  }
+
+  // Generate WhatsApp URL with responsive logic
+  const generateWhatsAppURL = (message: string) => {
+    const phoneNumber = cleanPhoneNumber(settings?.noTelp || '628123456789')
+    const encodedMessage = encodeURIComponent(message)
+    
+    if (isMobile) {
+      return `https://wa.me/${phoneNumber}?text=${encodedMessage}`
+    } else {
+      return `https://web.whatsapp.com/send?phone=${phoneNumber}&text=${encodedMessage}`
+    }
+  }
 
 
   useEffect(() => {
@@ -143,7 +187,9 @@ export default function Home() {
             {texts.home.hero.subtitle}
           </p>
           <a 
-            href="mailto:dawaladev@gmail.com"
+            href={generateWhatsAppURL('Halo, saya tertarik untuk mengetahui lebih lanjut tentang paket wisata dan kuliner di Desa Wisata Alamendah.')}
+            target="_blank"
+            rel="noopener noreferrer"
             className="inline-block bg-green-600 hover:bg-green-700 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-lg font-semibold text-base sm:text-lg transition-colors shadow-lg"
           >
             {texts.home.hero.ctaButton}
@@ -404,15 +450,14 @@ export default function Home() {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center px-4">
             <a 
-              href={`mailto:${texts.footer.contactInfo.email}`}
-              className="inline-block bg-white text-green-600 px-6 sm:px-8 py-3 rounded-lg font-semibold text-base sm:text-lg hover:bg-gray-100 transition-colors shadow-lg"
+              href={generateWhatsAppURL('Halo, saya ingin bertanya mengenai paket wisata dan kuliner yang tersedia di Desa Wisata Alamendah.')}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center bg-white text-green-600 px-3 sm:px-4 py-3 rounded-lg font-semibold text-base sm:text-lg hover:bg-gray-100 transition-colors shadow-lg"
             >
-              {texts.home.cta.emailButton}
-            </a>
-            <a 
-              href="tel:+62123456789"
-              className="inline-block bg-transparent border-2 border-white text-white px-6 sm:px-8 py-3 rounded-lg font-semibold text-base sm:text-lg hover:bg-white hover:text-green-600 transition-colors"
-            >
+              <svg className="w-4 h-4 sm:w-5 sm:h-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.488"/>
+                </svg>
               {texts.home.cta.contactButton}
             </a>
           </div>

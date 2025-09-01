@@ -12,6 +12,7 @@ interface FooterProps {
 
 export default function Footer({ locale }: FooterProps) {
   const [texts, setTexts] = useState<Texts | null>(null)
+  const [isMobile, setIsMobile] = useState(false)
   const { settings } = useSettings()
 
   useEffect(() => {
@@ -24,6 +25,47 @@ export default function Footer({ locale }: FooterProps) {
     }
     loadTexts()
   }, [locale])
+
+  // Detect screen size for responsive WhatsApp link
+  useEffect(() => {
+    const checkScreenSize = () => {
+      setIsMobile(window.innerWidth < 1024)
+    }
+    
+    checkScreenSize()
+    window.addEventListener('resize', checkScreenSize)
+    
+    return () => window.removeEventListener('resize', checkScreenSize)
+  }, [])
+
+  // Helper function to clean phone number for WhatsApp
+  const cleanPhoneNumber = (phone: string) => {
+    if (!phone) return '628123456789'
+    
+    let cleaned = phone.replace(/\D/g, '')
+    
+    if (cleaned.startsWith('08')) {
+      cleaned = '62' + cleaned.substring(1)
+    } else if (cleaned.startsWith('8')) {
+      cleaned = '62' + cleaned
+    } else if (!cleaned.startsWith('62')) {
+      cleaned = '628123456789'
+    }
+    
+    return cleaned
+  }
+
+  // Generate WhatsApp URL with responsive logic
+  const generateWhatsAppURL = () => {
+    const phoneNumber = cleanPhoneNumber(settings?.noTelp || '628123456789')
+    const message = encodeURIComponent(`Halo, saya ingin melakukan reservasi paket wisata di Desa Wisata Alamendah.`)
+    
+    if (isMobile) {
+      return `https://wa.me/${phoneNumber}?text=${message}`
+    } else {
+      return `https://web.whatsapp.com/send?phone=${phoneNumber}&text=${message}`
+    }
+  }
 
   if (!texts) {
     return (
@@ -74,7 +116,7 @@ export default function Footer({ locale }: FooterProps) {
               <Link href="/contact" className="block text-gray-300 hover:text-white transition-colors text-sm sm:text-base">
                 {texts.footer.quickLinks.contact}
               </Link>
-              <a href="mailto:dawaladev@gmail.com" className="block text-gray-300 hover:text-white transition-colors text-sm sm:text-base">
+              <a href={generateWhatsAppURL()} target="_blank" rel="noopener noreferrer" className="block text-gray-300 hover:text-white transition-colors text-sm sm:text-base">
                 {texts.footer.quickLinks.reservation}
               </a>
             </div>

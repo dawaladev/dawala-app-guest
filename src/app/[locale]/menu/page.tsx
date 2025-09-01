@@ -13,6 +13,7 @@ import { getTexts, Texts } from '@/lib/texts'
 import { usePathname } from 'next/navigation'
 import { getCurrentLocale } from '@/lib/locale'
 import { getFoodDescription } from '@/lib/database-i18n'
+import { useSettings } from '@/hooks/useSettings'
 
 export default function Menu() {
   const [makanan, setMakanan] = useState<Makanan[]>([])
@@ -23,9 +24,11 @@ export default function Menu() {
   const [error, setError] = useState<string | null>(null)
   const [selectedMakanan, setSelectedMakanan] = useState<Makanan | null>(null)
   const [isModalOpen, setIsModalOpen] = useState(false)
+  const [isMobile, setIsMobile] = useState(false)
   const pathname = usePathname()
   const locale = getCurrentLocale(pathname)
   const [texts, setTexts] = useState<Texts | null>(null)
+  const { settings } = useSettings()
 
   useEffect(() => {
     const loadTexts = async () => {
@@ -34,6 +37,47 @@ export default function Menu() {
     }
     loadTexts()
   }, [locale])
+
+  // Detect screen size for responsive WhatsApp link
+  useEffect(() => {
+    const checkScreenSize = () => {
+      setIsMobile(window.innerWidth < 1024)
+    }
+    
+    checkScreenSize()
+    window.addEventListener('resize', checkScreenSize)
+    
+    return () => window.removeEventListener('resize', checkScreenSize)
+  }, [])
+
+  // Helper function to clean phone number for WhatsApp
+  const cleanPhoneNumber = (phone: string) => {
+    if (!phone) return '628123456789'
+    
+    let cleaned = phone.replace(/\D/g, '')
+    
+    if (cleaned.startsWith('08')) {
+      cleaned = '62' + cleaned.substring(1)
+    } else if (cleaned.startsWith('8')) {
+      cleaned = '62' + cleaned
+    } else if (!cleaned.startsWith('62')) {
+      cleaned = '628123456789'
+    }
+    
+    return cleaned
+  }
+
+  // Generate WhatsApp URL with responsive logic
+  const generateWhatsAppURL = () => {
+    const phoneNumber = cleanPhoneNumber(settings?.noTelp || '628123456789')
+    const message = encodeURIComponent(`Halo, saya tertarik dengan paket wisata dan kuliner yang tersedia di Desa Wisata Alamendah. Mohon informasi lebih lanjut.`)
+    
+    if (isMobile) {
+      return `https://wa.me/${phoneNumber}?text=${message}`
+    } else {
+      return `https://web.whatsapp.com/send?phone=${phoneNumber}&text=${message}`
+    }
+  }
 
   useEffect(() => {
     const fetchData = async () => {
@@ -235,7 +279,9 @@ export default function Menu() {
             {texts.menu.cta.subtitle}
           </p>
           <a 
-            href="mailto:dawaladev@gmail.com"
+            href={generateWhatsAppURL()}
+            target="_blank"
+            rel="noopener noreferrer"
             className="inline-block bg-white text-green-600 px-6 sm:px-8 py-3 rounded-lg font-semibold text-base sm:text-lg hover:bg-gray-100 transition-colors"
           >
             {texts.menu.cta.button}

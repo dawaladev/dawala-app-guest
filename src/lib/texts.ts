@@ -1,4 +1,3 @@
-import { config } from './config'
 import { translateText } from './translate'
 
 // Type definition for the texts structure
@@ -215,13 +214,6 @@ const generateEnglishTranslations = async (idTexts: Texts): Promise<Texts> => {
 
 // Function to get texts with type safety
 export const getTexts = async (locale: 'id' | 'en' = 'id'): Promise<Texts> => {
-  // Safe access to config with fallbacks
-  const safeConfig = {
-    contact: {
-      email: (typeof window !== 'undefined' ? process.env.NEXT_PUBLIC_CONTACT_EMAIL : process.env.NEXT_PUBLIC_CONTACT_EMAIL) || 'dawaladev@gmail.com',
-      phone: (typeof window !== 'undefined' ? process.env.NEXT_PUBLIC_CONTACT_PHONE : process.env.NEXT_PUBLIC_CONTACT_PHONE) || '+62 xxx-xxxx-xxxx'
-    }
-  }
   
   // Import JSON data directly to avoid Turbopack HMR issues
   const textsDataId = {
@@ -240,8 +232,8 @@ export const getTexts = async (locale: 'id' | 'en' = 'id'): Promise<Texts> => {
       "subDescription": "Nikmati keindahan alam dan cita rasa kuliner lokal yang autentik di Jawa Barat.",
       "contactInfo": {
         "title": "Informasi Kontak",
-        "email": safeConfig.contact.email,
-        "phone": safeConfig.contact.phone,
+        "email": "dawaladev@gmail.com",
+        "phone": "+62 xxx-xxxx-xxxx",
         "location": "Desa Wisata Alamendah, Kab. Bandung, Indonesia"
       },
       "quickLinks": {
@@ -319,12 +311,12 @@ export const getTexts = async (locale: 'id' | 'en' = 'id'): Promise<Texts> => {
         "title": "Informasi Kontak",
         "email": {
           "label": "Email",
-          "value": safeConfig.contact.email,
+          "value": "dawaladev@gmail.com",
           "link": "Kirim email ke kami"
         },
         "phone": {
           "label": "Telepon",
-          "value": safeConfig.contact.phone,
+          "value": "+62 xxx-xxxx-xxxx",
           "hours": "Tersedia 08.00 - 17.00 WIB"
         },
         "location": {
@@ -482,12 +474,12 @@ export const getTexts = async (locale: 'id' | 'en' = 'id'): Promise<Texts> => {
             title: "Contact Information",
             email: {
               label: "Email",
-              value: safeConfig.contact.email,
+              value: "dawaladev@gmail.com",
               link: "Send us an email"
             },
             phone: {
               label: "Phone",
-              value: safeConfig.contact.phone,
+              value: "+62 xxx-xxxx-xxxx",
               hours: "Available 08:00 - 17:00 WIB"
             },
             location: {

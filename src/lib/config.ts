@@ -9,12 +9,6 @@ export const config = {
     storageUrl: process.env.NEXT_PUBLIC_SUPABASE_STORAGE_URL || 'https://iroaauayoqlfsetgtlec.supabase.co/storage/v1/object/public/gastronomi'
   },
   
-  // Contact Information
-  contact: {
-    email: process.env.NEXT_PUBLIC_CONTACT_EMAIL || 'dawaladev@gmail.com',
-    phone: process.env.NEXT_PUBLIC_CONTACT_PHONE || '+62 xxx-xxxx-xxxx'
-  },
-  
   // Database Configuration
   database: {
     url: process.env.DATABASE_URL || ''
