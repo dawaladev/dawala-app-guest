@@ -249,7 +249,7 @@ Mohon informasi lebih lanjut untuk pemesanan.`
                         e.stopPropagation();
                         prevImage();
                       }}
-                      className="absolute left-2 sm:left-4 top-1/2 transform -translate-y-1/2 bg-white bg-opacity-80 hover:bg-opacity-100 rounded-full p-1.5 sm:p-2 shadow-lg transition-all cursor-pointer"
+                      className="absolute left-2 sm:left-4 top-1/2 transform -translate-y-1/2 bg-white bg-opacity-80 hover:bg-opacity-100 rounded-full p-2 sm:p-2 shadow-lg transition-all cursor-pointer flex items-center justify-center"
                     >
                       <svg className="w-4 h-4 sm:w-6 sm:h-6 text-gray-800" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
@@ -260,7 +260,7 @@ Mohon informasi lebih lanjut untuk pemesanan.`
                         e.stopPropagation();
                         nextImage();
                       }}
-                      className="absolute right-2 sm:right-4 top-1/2 transform -translate-y-1/2 bg-white bg-opacity-80 hover:bg-opacity-100 rounded-full p-1.5 sm:p-2 shadow-lg transition-all cursor-pointer"
+                      className="absolute right-2 sm:right-4 top-1/2 transform -translate-y-1/2 bg-white bg-opacity-80 hover:bg-opacity-100 rounded-full p-2 sm:p-2 shadow-lg transition-all cursor-pointer flex items-center justify-center"
                     >
                       <svg className="w-4 h-4 sm:w-6 sm:h-6 text-gray-800" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
@@ -388,7 +388,7 @@ Mohon informasi lebih lanjut untuk pemesanan.`
               <>
                 <button
                   onClick={prevImage}
-                  className="absolute left-2 sm:left-4 top-1/2 transform -translate-y-1/2 bg-green-600 hover:bg-green-700 text-white rounded-full p-2 sm:p-4 transition-all cursor-pointer"
+                  className="absolute left-2 sm:left-4 top-1/2 transform -translate-y-1/2 bg-green-600 hover:bg-green-700 text-white rounded-full p-2 sm:p-4 transition-all cursor-pointer flex items-center justify-center"
                 >
                   <svg className="w-5 h-5 sm:w-8 sm:h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
@@ -396,7 +396,7 @@ Mohon informasi lebih lanjut untuk pemesanan.`
                 </button>
                 <button
                   onClick={nextImage}
-                  className="absolute right-2 sm:right-4 top-1/2 transform -translate-y-1/2 bg-green-600 hover:bg-green-700 text-white rounded-full p-2 sm:p-4 transition-all cursor-pointer"
+                  className="absolute right-2 sm:right-4 top-1/2 transform -translate-y-1/2 bg-green-600 hover:bg-green-700 text-white rounded-full p-2 sm:p-4 transition-all cursor-pointer flex items-center justify-center"
                 >
                   <svg className="w-5 h-5 sm:w-8 sm:h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
