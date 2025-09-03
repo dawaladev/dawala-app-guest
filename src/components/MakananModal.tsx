@@ -64,6 +64,12 @@ export default function MakananModal({ makanan, isOpen, onClose }: MakananModalP
   // Quantity control functions
   const increaseQuantity = () => setQuantity(prev => prev + 1)
   const decreaseQuantity = () => setQuantity(prev => prev > 1 ? prev - 1 : 1)
+  const handleQuantityChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = parseInt(e.target.value)
+    if (!isNaN(value) && value > 0) {
+      setQuantity(value)
+    }
+  }
   
   // Calculate total price
   const totalPrice = makanan.harga * quantity
@@ -303,7 +309,13 @@ Mohon informasi lebih lanjut untuk pemesanan.`
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20 12H4" />
                         </svg>
                       </button>
-                      <span className="px-4 py-2 font-medium text-gray-800">{quantity}</span>
+                      <input
+                        type="number"
+                        min="1"
+                        value={quantity}
+                        onChange={handleQuantityChange}
+                        className="px-4 py-2 font-medium text-gray-800 text-center border-none outline-none w-16 bg-transparent [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none [-moz-appearance:textfield]"
+                      />
                       <button
                         onClick={increaseQuantity}
                         className="p-2 text-gray-800 hover:bg-gray-100 transition-colors cursor-pointer"
