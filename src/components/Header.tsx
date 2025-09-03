@@ -108,12 +108,12 @@ export default function Header() {
           <div className="flex items-center flex-shrink-0">
             <Link href="/" className="flex items-center">
               <Image
-                src="/Dawala.png"
+                src="/images/Dawala.png"
                 alt={texts.header.logoAlt}
-                width={isScrolled ? 160 : 192}
-                height={isScrolled ? 40 : 48}
+                width={isScrolled ? 220 : 260}
+                height={isScrolled ? 60 : 72}
                 className={`w-auto transition-all duration-300 ${
-                  isScrolled ? 'h-8 sm:h-10' : 'h-10 sm:h-12'
+                  isScrolled ? 'h-14 sm:h-16' : 'h-16 sm:h-20'
                 }`}
               />
             </Link>
