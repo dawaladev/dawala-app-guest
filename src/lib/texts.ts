@@ -242,7 +242,7 @@ export const getTexts = async (locale: 'id' | 'en' = 'id'): Promise<Texts> => {
         "contact": "Hubungi Kami",
         "reservation": "Reservasi"
       },
-      "copyright": "© 2025 DESA WISATA ALAMENDAH. All rights reserved."
+      "copyright": "© 2025 UNIVERSITAS PERTAMINA. All rights reserved."
     },
     "home": {
       "hero": {
@@ -343,7 +343,7 @@ export const getTexts = async (locale: 'id' | 'en' = 'id'): Promise<Texts> => {
         "button": "Hubungi Kami Sekarang"
       },
       "filter": {
-        "allPackages": "Semua Paket"
+        "allPackages": "Semua Kategori"
       }
     },
     "modal": {
@@ -413,7 +413,7 @@ export const getTexts = async (locale: 'id' | 'en' = 'id'): Promise<Texts> => {
             contact: "Contact Us",
             reservation: "Reservation"
           },
-          copyright: "© 2025 ALAMENDAH TOURISM VILLAGE. All rights reserved."
+          copyright: "© 2025 UNIVERSITAS PERTAMINA. All rights reserved."
         },
         home: {
           ...textsDataId.home,
@@ -506,7 +506,7 @@ export const getTexts = async (locale: 'id' | 'en' = 'id'): Promise<Texts> => {
             button: "Contact Us Now"
           },
           filter: {
-            allPackages: "All Packages"
+            allPackages: "All Categories"
           }
         },
         modal: {
