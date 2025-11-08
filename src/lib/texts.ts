@@ -252,7 +252,7 @@ export const getTexts = async (locale: 'id' | 'en' = 'id'): Promise<Texts> => {
       },
       "featured": {
         "badge": "Unggulan Kami",
-        "title": "Paket Wisata & Kuliner",
+        "title": "Paket Wisata & Kuliner (Gastronomi Halal)",
         "description": "Temukan berbagai pilihan paket wisata dan kuliner yang telah kami siapkan khusus untuk pengalaman yang berkesan di Desa Wisata Alamendah, Kabupaten Bandung"
       },
       "about": {
@@ -328,7 +328,7 @@ export const getTexts = async (locale: 'id' | 'en' = 'id'): Promise<Texts> => {
     },
     "menu": {
       "header": {
-        "title": "Paket Wisata & Kuliner Lengkap",
+        "title": "Paket Wisata & Kuliner (Gastronomi Halal) Lengkap",
         "subtitle": "Jelajahi semua pilihan paket wisata dan kuliner yang tersedia di Desa Wisata Alamendah, Kabupaten Bandung"
       },
       "content": {
