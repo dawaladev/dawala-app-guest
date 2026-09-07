@@ -1,4 +1,8 @@
+import pool from '@/lib/postgres'
 import { config } from '@/lib/config'
+
+const DEFAULT_EMAIL = 'dawaladev@gmail.com'
+const DEFAULT_PHONE = '628123456789'
 
 function normalizeAppUrl(raw: string): string {
   const trimmed = raw.trim().replace(/\/$/, '')
@@ -18,15 +22,38 @@ export type PublicContact = {
   contactPageUrl: string
 }
 
+async function loadSettingsContact(): Promise<{ email: string; phone: string }> {
+  try {
+    const result = await pool.query(
+      `
+        SELECT
+          email,
+          no_telp as "noTelp"
+        FROM settings
+        ORDER BY id DESC
+        LIMIT 1
+      `,
+    )
+    const row = result.rows[0] as { email?: string; noTelp?: string } | undefined
+    return {
+      email: row?.email?.trim() || DEFAULT_EMAIL,
+      phone: row?.noTelp?.trim() || DEFAULT_PHONE,
+    }
+  } catch (error) {
+    console.error('[chat/kontak] settings DB error:', error)
+    return { email: DEFAULT_EMAIL, phone: DEFAULT_PHONE }
+  }
+}
+
 /**
- * Info kontak yang sama dengan halaman /contact (bukan scrape HTML).
- * Email & telepon mengikuti config yang dipakai UI.
+ * Info kontak yang sama dengan halaman /contact (tabel settings).
  */
-export function getPublicContact(locale: 'id' | 'en' = 'id'): PublicContact {
+export async function getPublicContact(
+  locale: 'id' | 'en' = 'id',
+): Promise<PublicContact> {
   const appUrl = normalizeAppUrl(config.app.url)
   const name = config.app.name
-  const email = config.contact.email
-  const phone = config.contact.phone
+  const { email, phone } = await loadSettingsContact()
   const contactPageUrl = `${appUrl}/${locale}/contact`
 
   if (locale === 'en') {

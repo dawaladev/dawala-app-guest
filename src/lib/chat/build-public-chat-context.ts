@@ -1,5 +1,6 @@
 import pool from '@/lib/postgres'
 import { config } from '@/lib/config'
+import { getPublicContact } from '@/lib/chat/public-contact'
 
 const MAX_PACKAGES = 40
 const MAX_BODY_CHARS = 280
@@ -54,6 +55,7 @@ export async function buildPublicChatContextText(): Promise<{
   generatedAt: string
 }> {
   const now = new Date()
+  const kontak = await getPublicContact('id')
 
   let jenisPaket: JenisPaketRow[] = []
   let makanan: MakananRow[] = []
@@ -100,11 +102,12 @@ export async function buildPublicChatContextText(): Promise<{
     '## Identitas & kontak',
     `- Nama situs: ${config.app.name}`,
     '- Tagline: Desa wisata & kuliner di Kabupaten Bandung',
-    `- Email: ${config.contact.email}`,
-    `- Telepon: ${config.contact.phone}`,
-    '- Lokasi: Desa Wisata Alamendah, Kabupaten Bandung, Jawa Barat, Indonesia',
-    '- Jam layanan telepon: 08.00 - 17.00 WIB',
+    `- Email: ${kontak.email}`,
+    `- Telepon: ${kontak.phone}`,
+    `- Lokasi: ${kontak.location}`,
+    `- Jam layanan telepon: ${kontak.phoneHours}`,
     `- Website: ${config.app.url}`,
+    `- Halaman Kontak: ${kontak.contactPageUrl}`,
     '',
     '## Tentang desa',
     '- Desa Wisata Alamendah menawarkan pengalaman autentik kehidupan pedesaan: wisata alam, budaya, edukasi, dan kuliner tradisional.',
@@ -112,7 +115,7 @@ export async function buildPublicChatContextText(): Promise<{
     '- Akomodasi: penginapan dengan pemandangan pegunungan, udara sejuk, fasilitas modern bernuansa tradisional.',
     '',
     '## Cara reservasi',
-    `- Reservasi via email ke ${config.contact.email} dengan menyebutkan nama paket yang diminati.`,
+    `- ${kontak.reservation}`,
     '- Atau hubungi telepon / kunjungi halaman Kontak di website.',
     '',
   ]

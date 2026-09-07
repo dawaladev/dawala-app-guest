@@ -11,6 +11,6 @@ export async function GET(request: NextRequest) {
 
   return NextResponse.json({
     ok: true,
-    data: getPublicContact(locale),
+    data: await getPublicContact(locale),
   })
 }

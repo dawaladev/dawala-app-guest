@@ -48,11 +48,11 @@ function normalizeAppUrl(raw: string): string {
   return `http://${trimmed}`
 }
 
-export function buildPublicChatPayload(
+export async function buildPublicChatPayload(
   message: string,
   sessionId: string,
   locale?: string,
-): PublicChatPayload {
+): Promise<PublicChatPayload> {
   const lang = locale === 'en' ? 'en' : 'id'
   return {
     type: 'public_chat',
@@ -60,7 +60,7 @@ export function buildPublicChatPayload(
     sessionId,
     locale: lang,
     appUrl: normalizeAppUrl(config.app.url),
-    kontak: getPublicContact(lang),
+    kontak: await getPublicContact(lang),
   }
 }
 
@@ -151,7 +151,7 @@ export async function dispatchPublicChatToN8n(
     }
   }
 
-  const payload = buildPublicChatPayload(message, sessionId, locale)
+  const payload = await buildPublicChatPayload(message, sessionId, locale)
   const secret = n8nWebhookSecret()
 
   try {
