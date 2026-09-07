@@ -73,6 +73,8 @@ const copy = {
   },
 } as const
 
+type ChatCopy = { [K in keyof (typeof copy)['id']]: string }
+
 function createId() {
   return `${Date.now()}-${Math.random().toString(36).slice(2, 9)}`
 }
@@ -479,7 +481,7 @@ async function requestChatReply(
   message: string,
   sessionId: string,
   locale: 'id' | 'en',
-  t: (typeof copy)['id'],
+  t: ChatCopy,
 ): Promise<{ reply: string; sessionId?: string }> {
   const response = await fetch('/api/chat', {
     method: 'POST',
