@@ -23,6 +23,13 @@ export const config = {
   app: {
     name: process.env.NEXT_PUBLIC_APP_NAME || 'Desa Wisata Alamendah',
     url: process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000'
+  },
+
+  // n8n chatbot (server-only)
+  n8n: {
+    chatWebhookUrl: process.env.N8N_CHAT_WEBHOOK_URL || '',
+    webhookSecret: process.env.N8N_WEBHOOK_SECRET || '',
+    chatTimeoutMs: process.env.N8N_CHAT_TIMEOUT_MS || '120000'
   }
 }
 

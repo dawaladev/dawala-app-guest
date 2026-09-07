@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "../globals.css";
 import LocaleProvider from "@/components/LocaleProvider";
+import FloatingChatWidget from "@/components/FloatingChatWidget";
 
 const locales = ['id', 'en'];
 
@@ -31,6 +32,7 @@ export default async function LocaleLayout({
     <LocaleProvider>
       <div data-locale={locale}>
         {children}
+        <FloatingChatWidget />
       </div>
     </LocaleProvider>
   );
