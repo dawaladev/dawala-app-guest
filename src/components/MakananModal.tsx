@@ -126,18 +126,6 @@ Mohon informasi lebih lanjut untuk pemesanan. Terima kasih!`
     return cleaned
   }
 
-  // Generate Email message
-  const generateEmailMessage = () => {
-    return `Saya tertarik untuk memesan:
-
-Paket: ${makanan.namaMakanan}
-Jumlah: ${quantity} paket
-Harga satuan: Rp ${makanan.harga.toLocaleString('id-ID')}
-Total harga: Rp ${totalPrice.toLocaleString('id-ID')}
-
-Mohon informasi lebih lanjut untuk pemesanan.`
-  }
-
   // Helper to get correct image src
   const getImageUrl = (fotoStr: string) => {
     return getSupabaseImageUrl(fotoStr);
@@ -194,9 +182,6 @@ Mohon informasi lebih lanjut untuk pemesanan.`
   }
   const prevImage = () => {
     setCurrentImageIndex((prev) => (prev - 1 + images.length) % images.length)
-  }
-  const goToImage = (index: number) => {
-    setCurrentImageIndex(index)
   }
 
   const toggleFullscreen = () => {
